@@ -316,10 +316,10 @@ pub enum Command {
         /// calling `.command_ident()` on any Item
         item_ident: ItemCommandIdent,
     },
-    /// Opens the message at the specified index [0-100]
+    /// Opens the message with the specified message id
     MessageOpen {
-        /// The index of the message in the inbox vec
-        pos: i32,
+        /// The id of the message to view
+        msg_id: i32,
     },
     /// Deletes a single message, if you provide the index. -1 = all
     MessageDelete {
@@ -1242,8 +1242,8 @@ impl Command {
                 format!("GroupFightableTargets:")
             }
             Command::FightPortal => format!("PlayerPortalBattle:"),
-            Command::MessageOpen { pos: index } => {
-                format!("PlayerMessageView:{}", *index + 1)
+            Command::MessageOpen { msg_id } => {
+                format!("PlayerMessageView:{msg_id}")
             }
             Command::MessageDelete { pos: index } => format!(
                 "PlayerMessageDelete:{}",
